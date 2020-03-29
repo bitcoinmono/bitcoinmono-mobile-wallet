@@ -32,7 +32,7 @@ export function initSentry() {
     if (sentryIsEnabled) {
         /* CHANGE THIS IF YOU ARE FORKING! */
         Sentry.init({ 
-          dsn: 'https://86c88ae9d73443979875e5410324e111@sentry.io/1411111', 
+          dsn: 'https://cb88f25a89ca4f90a74de95959a6f49b@sentry.io/5178876', 
         });
 
         Sentry.setRelease('com.tonchan-' + Config.appVersion);

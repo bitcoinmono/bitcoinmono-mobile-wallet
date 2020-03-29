@@ -15,12 +15,12 @@ const Config = new function() {
     /**
      * If you can't figure this one out, I don't have high hopes
      */
-    this.coinName = 'TurtleCoin';
+    this.coinName = 'BitcoinMono';
 
     /**
      * Prefix for URI encoded addresses
      */
-    this.uriPrefix = 'turtlecoin://';
+    this.uriPrefix = 'bitcoinmono://';
 
     /**
      * How often to save the wallet, in milliseconds
@@ -31,23 +31,23 @@ const Config = new function() {
      * The amount of decimal places your coin has, e.g. TurtleCoin has two
      * decimals
      */
-    this.decimalPlaces = 2;
+    this.decimalPlaces = 4;
 
     /**
      * The address prefix your coin uses - you can find this in CryptoNoteConfig.h.
-     * In TurtleCoin, this converts to TRTL
+     * In TurtleCoin, this converts to BTCMZ
      */
-    this.addressPrefix = 3914525;
+    this.addressPrefix = 3771344;
 
     /**
      * Request timeout for daemon operations in milliseconds
      */
-    this.requestTimeout = 10 * 1000;
+    this.requestTimeout = 20 * 1000;
 
     /**
      * The block time of your coin, in seconds
      */
-    this.blockTargetTime = 30;
+    this.blockTargetTime = 50;
 
     /**
      * How often to process blocks, in millseconds
@@ -74,7 +74,7 @@ const Config = new function() {
     /**
      * Your coins 'ticker', generally used to refer to the coin, i.e. 123 TRTL
      */
-    this.ticker = 'TRTL';
+    this.ticker = 'BTCMZ';
 
     /**
      * Most people haven't mined any blocks, so lets not waste time scanning
@@ -85,21 +85,16 @@ const Config = new function() {
     /**
      * The minimum fee allowed for transactions, in ATOMIC units
      */
-    this.minimumFee = 10;
+    this.minimumFee = 5000000;
 
     /**
      * Mapping of height to mixin maximum and mixin minimum
      */
     this.mixinLimits = new MixinLimits([
-        /* Height: 440,000, minMixin: 0, maxMixin: 100, defaultMixin: 3 */
-        new MixinLimit(440000, 0, 100, 3),
+        /* Height: 10,000, minMixin: 0, maxMixin: 30, defaultMixin: 3 */
+        new MixinLimit(250000, 0, 3, 1),
 
-        /* At height of 620000, static mixin of 7 */
-        new MixinLimit(620000, 7),
-
-        /* At height of 800000, static mixin of 3 */
-        new MixinLimit(800000, 3),
-    ], 3 /* Default mixin of 3 before block 440,000 */);
+    ], 1 /* Default mixin of 3 before block 250000 */);
 
     /**
      * The length of a standard address for your coin
@@ -148,12 +143,12 @@ const Config = new function() {
     /**
      * Memory to use for storing downloaded blocks - 3MB
      */
-    this.blockStoreMemoryLimit = 1024 * 1024 * 3;
+    this.blockStoreMemoryLimit = 1024 * 1024 * 32;
 
     /**
      * Amount of blocks to request from the daemon at once
      */
-    this.blocksPerDaemonRequest = 100;
+    this.blocksPerDaemonRequest = 20;
 
     /**
      * Unix timestamp of the time your chain was launched.
@@ -163,17 +158,17 @@ const Config = new function() {
      * should be equal to your current block count. If it's significantly different,
      * you can offset your timestamp to fix the discrepancy
      */
-    this.chainLaunchTimestamp = new Date(1000 * 1513031505);
+    this.chainLaunchTimestamp = new Date(1000 * 1529831318);
 
     /**
      * Fee to take on all transactions, in percentage
      */
-    this.devFeePercentage = 0.5;
+    this.devFeePercentage = 0.0;
 
     /**
      * Address to send dev fee to
      */
-    this.devFeeAddress = 'TRTLv1E3ThL66fHthRHyzPSDqeUazPA9eBQYkuRnp8svKgvdoecQtqhSRaD59CEuH8XnYsw3YGtw1RWsQSqtHLqUXu4tvk9LryR';
+    this.devFeeAddress = 'btcmzTHkHtyhMoh8rjKgfvD13yFhs4eMmVBbuRcBMBZLdK67HCFbc4LegfEggApq8R2JJo8198vc4SwRjytTEbFZVvz6AyEUkuP';
 
     /**
      * Base url for price API
@@ -188,34 +183,34 @@ const Config = new function() {
      * Default daemon to use. Can either be a BlockchainCacheApi(baseURL, SSL),
      * or a ConventionalDaemon(url, port).
      */
-    this.defaultDaemon = new Daemon('blockapi.turtlepay.io', 443);
+    this.defaultDaemon = new Daemon('remote.bitcoinmono.io', 11358);
 
     /**
      * A link to where a bug can be reported for your wallet. Please update
      * this if you are forking, so we don't get reported bugs for your wallet...
      *
      */
-    this.repoLink = 'https://github.com/turtlecoin/turtlecoin-mobile-wallet/issues';
+    this.repoLink = 'https://github.com/bitcoinmono/bitcoinmono-mobile-wallet/issues';
 
     /**
      * This only controls the name in the settings screen.
      */
-    this.appName = 'TonChan';
+    this.appName = 'BtcmzApp';
 
     /**
      * Slogan phrase during wallet CreateScreen
      */
-    this.sloganCreateScreen = 'Fast. Safe. Easy.';
+    this.sloganCreateScreen = 'Your BTCMZ Mobile Wallet!';
 
     /**
      * Displayed in the settings screen
      */
-    this.appVersion = 'v1.1.2';
+    this.appVersion = 'v1.0.0';
 
     /**
      * Base URL for us to chuck a hash on the end, and find a transaction
      */
-    this.explorerBaseURL = 'https://explorer.turtlecoin.lol/?search=';
+    this.explorerBaseURL = 'https://explorer.bitcoinmono.io/?hash=';
 
     /**
      * A link to your app on the Apple app store. Currently blank because we
@@ -226,13 +221,13 @@ const Config = new function() {
     /**
      * A link to your app on the google play store
      */
-    this.googlePlayLink = 'https://play.google.com/store/apps/details?id=com.tonchan';
+    this.googlePlayLink = 'https://play.google.com/store/apps/details?id=btcmzapp.semipool.com';
 
     /**
      * A url to fetch node info from. Should follow the turtlepay format 
      * detailed here: https://docs.turtlepay.io/blockapi/
      */
-    this.nodeListURL = 'https://blockapi.turtlepay.io/node/list';
+    this.nodeListURL = 'https://btcmz-nodes.bot.tips/list';
 };
 
 module.exports = Config;

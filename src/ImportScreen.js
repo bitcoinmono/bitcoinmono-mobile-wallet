@@ -62,7 +62,7 @@ export class ImportWalletScreen extends React.Component {
                         <Button
                             title="Pick a month"
                             onPress={() => this.props.navigation.navigate('PickMonth')}
-                            color={this.props.screenProps.theme.primaryColour}
+                            color={this.props.screenProps.theme.secondaryColour}
                         />
                     </View>
 
@@ -70,7 +70,7 @@ export class ImportWalletScreen extends React.Component {
                         <Button
                             title="Pick an approximate block height"
                             onPress={() => this.props.navigation.navigate('PickBlockHeight')}
-                            color={this.props.screenProps.theme.primaryColour}
+                            color={this.props.screenProps.theme.secondaryColour}
                         />
                     </View>
 
@@ -78,7 +78,7 @@ export class ImportWalletScreen extends React.Component {
                         <Button
                             title="Pick an exact block height"
                             onPress={() => this.props.navigation.navigate('PickExactBlockHeight')}
-                            color={this.props.screenProps.theme.primaryColour}
+                            color={this.props.screenProps.theme.secondaryColour}
                         />
                     </View>
 
@@ -86,7 +86,7 @@ export class ImportWalletScreen extends React.Component {
                         <Button
                             title="I don't Know"
                             onPress={() => this.props.navigation.navigate('ImportKeysOrSeed', { scanHeight: 0 })}
-                            color={this.props.screenProps.theme.primaryColour}
+                            color={this.props.screenProps.theme.secondaryColour}
                         />
                     </View>
                 </View>
@@ -127,7 +127,7 @@ export class ImportKeysOrSeedScreen extends React.Component {
                         <Button
                             title="25 Word Mnemonic Seed"
                             onPress={() => this.props.navigation.navigate('ImportSeed', { scanHeight: this.scanHeight })}
-                            color={this.props.screenProps.theme.primaryColour}
+                            color={this.props.screenProps.theme.secondaryColour}
                         />
                     </View>
 
@@ -135,7 +135,7 @@ export class ImportKeysOrSeedScreen extends React.Component {
                         <Button
                             title="Private Spend + Private View Key"
                             onPress={() => this.props.navigation.navigate('ImportKeys', { scanHeight: this.scanHeight })}
-                            color={this.props.screenProps.theme.primaryColour}
+                            color={this.props.screenProps.theme.secondaryColour}
                         />
                     </View>
                 </View>

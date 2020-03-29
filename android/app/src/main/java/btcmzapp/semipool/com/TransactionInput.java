@@ -1,4 +1,4 @@
-package com.tonchan;
+package btcmzapp.semipool.com;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.WritableArray;

@@ -11,7 +11,7 @@ import Config from './Config';
 /* Manually comparing to TurtleCoin to try and prevent getting errors reported
    for forks... */
 /* DO NOT CHANGE THIS LINE WITHOUT ALSO ALTERING THE Sentry.config() LINE - See readme and sentry docs. */
-const sentryIsEnabled = !__DEV__ && Config.coinName === 'BitcoinMono';
+const sentryIsEnabled = !__DEV__ && Config.coinName === 'Disabled';
 
 export function reportCaughtException(err) {
     /* Sentry doesn't properly report arbitary objects. Convert to string if

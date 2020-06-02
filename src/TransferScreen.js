@@ -785,11 +785,16 @@ export class ConfirmScreen extends React.Component {
     async prepareTransaction() {
         const payments = [];
 
+        /* Add fixed fee before forked fee per byte */
+        const [walletHeight, localHeight, networkHeight] = Globals.wallet.getSyncStatus();
+
+        let txFee = Config.minimumFee;
+
         /* User payment */
         if (this.state.sendAll) {
             payments.push([
                 this.state.payee.address,
-                1, /* Amount does not matter for sendAll destination */
+                (networkHeight >= Config.feePerByteHeight) ? 1 : (this.state.unlockedBalance - this.state.nodeFee - txFee), /* Amount does not matter for sendAll destination */
             ]);
         } else {
             payments.push([
@@ -809,7 +814,7 @@ export class ConfirmScreen extends React.Component {
         const result = await Globals.wallet.sendTransactionAdvanced(
             payments, // destinations,
             undefined, // mixin
-            undefined, // fee
+            (networkHeight >= Config.feePerByteHeight) ? undefined : {isFixedFee: true, fixedFee: txFee}, // fee
             this.state.payee.paymentID,
             undefined, // subWalletsToTakeFrom
             undefined, // changeAddress
@@ -819,6 +824,10 @@ export class ConfirmScreen extends React.Component {
 
         if (result.success) {
             let actualAmount = this.state.amount;
+
+            if (networkHeight >= Config.feePerByteHeight) {
+                txFee = result.fee;
+            }
 
             if (this.state.sendAll) {
                 let transactionSum = 0;
@@ -831,7 +840,7 @@ export class ConfirmScreen extends React.Component {
                 }
 
                 actualAmount = transactionSum
-                             - result.fee
+                             - txFee
                              - this.state.devFee
                              - this.state.nodeFee;
             }
@@ -839,10 +848,10 @@ export class ConfirmScreen extends React.Component {
             this.setState({
                 preparedTransaction: true,
                 haveError: false,
-                fee: result.fee,
+                fee: txFee,
                 hash: result.transactionHash,
                 recipientAmount: actualAmount,
-                feeTotal: result.fee + this.state.devFee + this.state.nodeFee,
+                feeTotal: txFee + this.state.devFee + this.state.nodeFee,
             });
         } else {
             this.setState({

@@ -11,7 +11,7 @@ import Config from './Config';
 /* Manually comparing to TurtleCoin to try and prevent getting errors reported
    for forks... */
 /* DO NOT CHANGE THIS LINE WITHOUT ALSO ALTERING THE Sentry.config() LINE - See readme and sentry docs. */
-const sentryIsEnabled = !__DEV__ && Config.coinName === 'Disabled';
+const sentryIsEnabled = !__DEV__ && Config.coinName === 'BitcoinMono';
 
 export function reportCaughtException(err) {
     /* Sentry doesn't properly report arbitary objects. Convert to string if
@@ -32,9 +32,9 @@ export function initSentry() {
     if (sentryIsEnabled) {
         /* CHANGE THIS IF YOU ARE FORKING! */
         Sentry.init({ 
-          dsn: 'https://cb88f25a89ca4f90a74de95959a6f49b@sentry.io/5178876', 
+          dsn: 'https://c1c60b0addac4c19add696706fa9dfa0@sentry.io/5251011', 
         });
 
-        Sentry.setRelease('com.tonchan-' + Config.appVersion);
+        Sentry.setRelease('tips.bot.btcmzmobile-' + Config.appVersion);
     }
 }

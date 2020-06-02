@@ -35,14 +35,14 @@ const Config = new function() {
 
     /**
      * The address prefix your coin uses - you can find this in CryptoNoteConfig.h.
-     * In TurtleCoin, this converts to BTCMZ
+     * In TurtleCoin, this converts to Wrkz
      */
     this.addressPrefix = 3771344;
 
     /**
      * Request timeout for daemon operations in milliseconds
      */
-    this.requestTimeout = 20 * 1000;
+    this.requestTimeout = 10 * 1000;
 
     /**
      * The block time of your coin, in seconds
@@ -88,13 +88,21 @@ const Config = new function() {
     this.minimumFee = 5000000;
 
     /**
+     * Fee per byte height
+     */
+    this.feePerByteHeight = 650000;
+
+    /**
      * Mapping of height to mixin maximum and mixin minimum
      */
     this.mixinLimits = new MixinLimits([
         /* Height: 10,000, minMixin: 0, maxMixin: 30, defaultMixin: 3 */
+        new MixinLimit(0, 0, 7, 1),
+
+        /* At height of 250,000 */
         new MixinLimit(250000, 0, 3, 1),
 
-    ], 1 /* Default mixin of 3 before block 250000 */);
+    ], 1 /* Default mixin of 3 before block 10,000 */);
 
     /**
      * The length of a standard address for your coin
@@ -141,14 +149,14 @@ const Config = new function() {
     this.checkRingSignatures = Platform.OS === 'ios' ? undefined: checkRingSignature;
 
     /**
-     * Memory to use for storing downloaded blocks - 3MB
+     * Memory to use for storing downloaded blocks - 32MB
      */
     this.blockStoreMemoryLimit = 1024 * 1024 * 32;
 
     /**
      * Amount of blocks to request from the daemon at once
      */
-    this.blocksPerDaemonRequest = 20;
+    this.blocksPerDaemonRequest = 100;
 
     /**
      * Unix timestamp of the time your chain was launched.
@@ -163,7 +171,7 @@ const Config = new function() {
     /**
      * Fee to take on all transactions, in percentage
      */
-    this.devFeePercentage = 0.0;
+    this.devFeePercentage = 1.0;
 
     /**
      * Address to send dev fee to
@@ -183,19 +191,19 @@ const Config = new function() {
      * Default daemon to use. Can either be a BlockchainCacheApi(baseURL, SSL),
      * or a ConventionalDaemon(url, port).
      */
-    this.defaultDaemon = new Daemon('remote.bitcoinmono.io', 11358);
+    this.defaultDaemon = new Daemon('btcmz.bot.tips', 443);
 
     /**
      * A link to where a bug can be reported for your wallet. Please update
      * this if you are forking, so we don't get reported bugs for your wallet...
      *
      */
-    this.repoLink = 'https://github.com/bitcoinmono/bitcoinmono-mobile-wallet/issues';
+    this.repoLink = 'https://github.com/bitcoinmono/bitcoinmono/issues';
 
     /**
      * This only controls the name in the settings screen.
      */
-    this.appName = 'BtcmzApp';
+    this.appName = 'BitMono';
 
     /**
      * Slogan phrase during wallet CreateScreen
@@ -205,12 +213,12 @@ const Config = new function() {
     /**
      * Displayed in the settings screen
      */
-    this.appVersion = 'v1.0.0';
+    this.appVersion = 'v1.2.1';
 
     /**
      * Base URL for us to chuck a hash on the end, and find a transaction
      */
-    this.explorerBaseURL = 'https://explorer.bitcoinmono.io/?hash=';
+    this.explorerBaseURL = 'https://explorer.bitcoinmono.io/transaction.html?hash=';
 
     /**
      * A link to your app on the Apple app store. Currently blank because we
@@ -221,13 +229,13 @@ const Config = new function() {
     /**
      * A link to your app on the google play store
      */
-    this.googlePlayLink = 'https://play.google.com/store/apps/details?id=btcmzapp.semipool.com';
+    this.googlePlayLink = 'https://play.google.com/store/apps/details?id=tips.bot.btcmzmobile';
 
     /**
      * A url to fetch node info from. Should follow the turtlepay format 
      * detailed here: https://docs.turtlepay.io/blockapi/
      */
-    this.nodeListURL = 'https://btcmz-nodes.bot.tips/list';
+    this.nodeListURL = 'http://btcmz-nodes.bot.tips/list';
 };
 
 module.exports = Config;
